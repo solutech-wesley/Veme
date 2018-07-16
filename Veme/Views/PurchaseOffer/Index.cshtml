@@ -1,0 +1,90 @@
+﻿@model Veme.Models.ViewModels.PurchaseCouponViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@Styles.Render("~/Content/register")
+@Styles.Render("~/Content/datepicker")
+
+<div class="container">
+    <div class="row main">
+        <div class="main-login main-center">
+            <h5>Purchase Coupons</h5>
+            @using (Html.BeginForm("Purchase", "PurchaseOffer", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(c => c.Merchants, new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            @Html.DropDownListFor(c => c.OfferId, new SelectList(Model.Merchants, "MerchantID", "CompanyName"), "", new { @class = "form-control" })
+                        </div>
+                        @Html.ValidationMessageFor(c => c.OfferId)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(c => c.Offer_Id, new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            @Html.DropDownListFor(c => c.Offer_Id, new SelectList(Model.Offer, "ID", "Name"), "", new { @class = "form-control", id = "ddshowOffers" })
+                        </div>
+                        @Html.ValidationMessageFor(c => c.Offer_Id)
+                    </div>
+                </div>
+
+
+                <div class="form-group ">
+                    <center>
+                        <input target="_blank" value="Purchase Coupon" type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button" />
+                    </center>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <!--Needed for client side validation-->
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script>
+        $(document).ready(function () {
+            //disable offer drowdown on page load
+            $('#ddshowOffers').prop("disabled", true);
+
+            //gets the offers then return the offer list
+            getMerchantOffers();
+        });
+
+        function getMerchantOffers() {
+            $('#OfferId').change(function () {
+                var value = this.value;
+                var url = '/PurchaseOffer/GetOffersByMerchant';
+                $('#ddshowOffers').empty();
+                $.ajax({
+                    url: url,
+                    data: { MerchantId: $('#OfferId').val() },
+                    cache: false,
+                    type: 'POST',
+                    success: function (data) {
+                        if (data != null) {
+                            $('#ddshowOffers').prop("disabled", false);
+                        }
+                        $.each(data, function (i, offer) {
+                            $('#ddshowOffers').append('<option value="'
+                                + offer.Value + '">'
+                                + offer.Text + '</option>');
+                        });
+                    },
+                    error: function (reponse) {
+                        alert("Oops!!!Something went wrong.");
+                    }
+                });
+            });
+        }
+    </script>
+}

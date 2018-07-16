@@ -1,0 +1,73 @@
+﻿@using Veme.Models
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    <!-- banner of the page -->
+    <section class="banner banner3 bg-full overlay" style="background-image: url(http://placehold.it/1920x320);">
+        <div class="holder">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h1>Login</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- twocolumns of the page -->
+    <div class="twocolumns pad-top-lg pad-bottom-lg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- Register holder of the page -->
+                    <div class="register-holder">
+                        <div class="txt-holder">
+                            <h3 class="heading2">Login Now!</h3>
+                            <p>Enter your details for login</p>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @*<form action="#" class="register-form">*@
+                            <fieldset>
+                                @*<input type="text" class="form-control" placeholder="Username *">*@
+                                @*<input type="password" class="form-control" placeholder="Password *">*@
+                                <div>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-check">
+                                    @*<input type="checkbox" name="vehicle" value="Car"> Remember Me*@
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                                <button type="submit" class="btn-primary text-center text-uppercase">Login Now</button>
+                                @*<input type="submit" value="Log in" class="btn btn-default" />*@
+                            </fieldset>
+                            @*</form>*@
+                            <div class="btn-holder">
+                                <a href="#" class="google-btn"><i class="fa fa-google-plus"></i> Sign in with Goolge</a>
+                                <a href="#" class="fb-btn"><i class="fa fa-facebook"></i> Sign in with Facebook</a>
+                            </div>
+                        </div>
+                        <div class="img-holder">
+                            <img src="http://placehold.it/570x390" alt="image description" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

@@ -1,0 +1,72 @@
+﻿@using Microsoft.AspNet.Identity
+@model Veme.Models.CustomerRegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<!-- banner of the page -->
+<section class="banner banner3 bg-full overlay" style="background-image: url(http://placehold.it/1920x320);">
+    <div class="holder">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h1>Register</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- twocolumns of the page -->
+<div class="twocolumns pad-top-lg pad-bottom-lg">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- Register holder of the page -->
+                <div class="register-holder">
+                    <div class="txt-holder">
+                        <h3 class="heading2">Register Customer Now</h3>
+                        <p>Fill the forum to confirm your registration</p>
+                        @using (Html.BeginForm("RegisterCustomer", "Account", FormMethod.Post, new { @class = "register-form",autocomplete="off" }))
+                        {
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                            @Html.AntiForgeryToken()
+                            <fieldset>
+                                @Html.TextBoxFor(c => c.FirstName, new { @class = "form-control", placeholder = "First Name *" })
+                                @*@Html.ValidationMessageFor(c => c.FirstName)*@
+                                @Html.TextBoxFor(c => c.LastName, new { @class = "form-control", placeholder = "Last Name *" })
+                                @*@Html.ValidationMessageFor(c => c.LastName)*@
+                                @Html.TextBoxFor(c => c.DOB, new { @class = "form-control", placeholder = "DOB *" })
+                                @*@Html.ValidationMessageFor(c => c.DOB)*@
+                                @Html.TextBoxFor(c => c.MobileNumber, new { @class = "form-control", placeholder = "Mobile Number *" })
+                                @*@Html.ValidationMessageFor(c => c.MobileNumber)*@
+                                @Html.TextBoxFor(c => c.Email, new { @class = "form-control", placeholder = "Email *", type = "email" })
+                                @*@Html.ValidationMessageFor(c => c.Email)*@
+                                @Html.TextBoxFor(c => c.ConfirmEmail, new { @class = "form-control", placeholder = "Confirm Email *", type = "email" })
+                                @*@Html.ValidationMessageFor(c => c.ConfirmEmail)*@
+                                @Html.PasswordFor(c => c.Password, new { @class = "form-control", placeholder = "Password *" })
+                                @*@Html.ValidationMessageFor(c => c.Password)*@
+                                @Html.PasswordFor(c => c.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password *"})
+                                @*@Html.ValidationMessageFor(c => c.ConfirmPassword)*@
+
+                                @*<div class="form-check">
+                                      <input type="checkbox" name="vehicle" value="Car"> Accept <a href="#" class="clr">Terms and Conditions</a>
+                                    </div>*@
+                                <button type="submit" class="btn-primary text-center text-uppercase">Register Now</button>
+                            </fieldset>
+                        }
+                        <div class="btn-holder">
+                            <a href="#" class="google-btn"><i class="fa fa-google-plus"></i> Sign in with Goolge</a>
+                            <a href="#" class="fb-btn"><i class="fa fa-facebook"></i> Sign in with Facebook</a>
+                        </div>
+                    </div>
+                    <div class="img-holder">
+                        <img src="http://placehold.it/600x520" alt="image description" class="img-responsive">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

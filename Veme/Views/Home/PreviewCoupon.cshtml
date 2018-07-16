@@ -1,0 +1,68 @@
+﻿@model Veme.Models.GenCouponViewModel
+@{
+    ViewBag.Title = "PreviewCoupon";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<!-- banner of the page -->
+<section class="banner banner3 bg-full overlay" style="background-image: url(http://placehold.it/1920x320);">
+    <div class="holder">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h1>Coupon Single</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <div id="div1" width="100%" style="padding: 0px 0px; font-family:arial; line-height:28px; height:100%;  width: 100%; color: #514d6a;">
+        <div id="div2" style="max-width: 700px; padding:50px 0;  margin: 0px auto; font-size: 14px">
+
+            @*<div style="padding: 40px; background: #fff;">*@
+            <div id="whiteBackground" style="padding: 20px; background: #fff;">
+
+                <div id="redBox" style="padding: 40px; background: #d30e2c; color:#fff;padding-top:10px;padding-bottom:10px;border-radius:25px;">
+                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                        <tbody>
+                            <tr>
+                                @*<td style="font-size:30px;font-family:'Comic Sans MS' Arial, Helvetica, sans-serif;background:#d30e2c; padding:20px; color:#fff; text-align:center;"> @Model.OfferDetails.MerchantName </td>*@
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <center>
+                                        <p style="font-size:20px"><b>(@Model.OfferDetails.Merchant.CompanyName)</b></p>
+                                        <p style="font-size:20px"><b>(@Model.OfferDetails.OfferName)</b></p>
+                                        <p style="font-size:20px">PROMOTION ENDS <b>@Model.OfferDetails.OfferEnds  </b></p>
+                                        <p style="font-size:15px">Terms & Condition:<b>@Model.OfferDetails.OfferDetails</b></p>
+                                    </center>
+                                    <center>
+                                        <h3 style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 60px; color: #fff; background: #d30e2c; border-radius: 60px ; text-decoration:solid;">@Model.OfferDetails.DiscountRate%</h3>
+                                    </center>
+                                    <p style="font-size:20px"> COUPON CODE: <b class="right">@Model.CouponCode</b></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            @*<br />*@
+            @using (Html.BeginForm("Index", "Home",FormMethod.Get))
+            {
+                <div class="form-group ">
+                    <center>
+                        <input target="_blank" value="Continue" type="submit" id="button" class="btn-primary md-round text-center text-uppercase" />
+                    </center>
+                </div>
+            }
+        </div>
+    </div>
+
+

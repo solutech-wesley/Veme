@@ -1,0 +1,25 @@
+﻿
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <li><a href="@Url.Action("RegisterMerchant","Account",null)"><i class="fa fa-briefcase"></i> Register Merchant</a></li>
+        <li>
+            @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+            <a href="@Url.Action("Index","Manage",null)"><i class="fa fa-user"></i> Hello @User.Identity.GetUserName() !</a>
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-unlock-alt"></i>Log off</a></li>
+    }
+}
+else
+{
+    @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })<i class="fa fa-user"></i></li>*@
+    @*<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })<i class="fa fa-unlock-alt"></i></li>*@
+    @*<li><a href="@Url.Action("Register","Account",null)"><i class="fa fa-user"></i> Register</a></li>*@
+    <li><a href="@Url.Action("RegisterMerchant","Account",null)"><i class="fa fa-briefcase"></i> Register Merchant</a></li>
+    <li><a href="@Url.Action("RegisterCustomer","Account",null)"><i class="fa fa-user"></i> Register Customer</a></li>
+    <li><a href="@Url.Action("Login","Account",null)"><i class="fa fa-unlock-alt"></i>Login</a></li>
+}

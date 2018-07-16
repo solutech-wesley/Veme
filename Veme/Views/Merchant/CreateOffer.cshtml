@@ -1,0 +1,229 @@
+﻿@using Microsoft.AspNet.Identity
+@model Veme.Models.MerchantCreateOfferViewModel
+@{
+    ViewBag.Title = "Create Offer";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+<style>
+    .right {
+        float: right;
+    }
+</style>
+
+@Styles.Render("~/Content/register")
+@Styles.Render("~/Content/datepicker")
+
+@using (Html.BeginForm("CreateOffer", "Merchant", FormMethod.Post, new { autocomplete = "off" }))
+{
+    <div class="container" id="form">
+        <div class="row main">
+            <div class="main-login main-center" style="background-color:#f6f6f6;">
+                <h5 class="heading3">Register Coupon</h5>
+                <p style="color:black;">Fill in the form below</p>
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+
+
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" style="visibility:hidden;" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.OfferName, new { @class = "form-control", placeholder = "Offer Name" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" style="visibility:hidden;" aria-hidden="true"></i></span>
+                            @Html.EditorFor(c => c.DiscountRate, new { htmlAttributes = new { @class = "form-control", placeholder = "Discount Percent *", @min = "1", @type = "number", @max = "100" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" style="visibility:hidden;" aria-hidden="true"></i></span>
+                            @Html.EditorFor(c => c.TotalOffer, new { htmlAttributes = new { @class = "form-control", placeholder = "Total Coupon" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" style="visibility:hidden;" aria-hidden="true"></i></span>
+                            @Html.TextAreaFor(c => c.OfferDetails, new { @class = "form-control", placeholder = "Offer Details *" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" style="visibility:hidden;" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.OfferBegins, new { @class = "form-control datepicker", placeholder = "Offer Begins" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" style="visibility:hidden;" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.OfferEnds, new { @class = "form-control datepicker", placeholder = "Offer Ends" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        @Html.LabelFor(c => c.OfferImg, new { @class = "cols-sm-2 control-label heading6" })
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" style="visibility:hidden;" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.OfferImg, new { @class = "form-control", @type = "file", placeholder = "Upload Display Image" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" style="visibility:hidden;" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.CouponDurationInMonths, new { @class = "form-control", placeholder = "Coupon Valid Duration in Months" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" style="visibility:hidden;" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.CouponPrice, new { @class = "form-control", placeholder = "Coupon Price" })
+                        </div>
+                    </div>
+                </div>
+                @Html.HiddenFor(c => c.OfferId)
+                @Html.HiddenFor(c => c.MerchantID)
+                <div class="form-group ">
+                    <center>
+                        <input target="_blank" value="Submit Coupon" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button" />
+                    </center>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--Section for Previewing Coupons-->
+
+    <div class="container" id="preview">
+        <div id="div1" width="100%" style="padding: 0px 0px; font-family:arial; line-height:28px; height:100%;  width: 100%; color: #514d6a;">
+            <div id="div2" style="max-width: 700px; padding:50px 0;  margin: 0px auto; font-size: 14px">
+                @*<table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin-bottom: 20px">
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align: top; padding-bottom:30px;" align="center">
+                                    <h3>Veme image</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>*@
+                <div id="whiteBackground" style="padding: 20px; background: #fff;">
+
+                    <div id="redBox" style="padding: 40px; background: #d30e2c; color:#fff;padding-top:10px;padding-bottom:10px;border-radius:25px;">
+                        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <td class="CompanyName" style="font-size:30px;font-family:'Comic Sans MS' Arial, Helvetica, sans-serif;background:#d30e2c; padding:20px; color:#fff; text-align:center;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <center>
+                                            <p class="OfferName" style="font-size:20px"><b>(Offer Name)</b></p>
+                                            <p class="OfferPeriod" style="font-size:20px">PROMOTION ENDS </p>
+
+                                            <p class="OfferDetails" style="font-size:15px">Terms & Condition:<b></b></p>
+
+                                        </center>
+
+                                        <center>
+                                            @*<a href="javascript: void(0);" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #00c0c8; border-radius: 60px; text-decoration:none;">Upgrade My Account</a>*@
+                                            <h3 class="DiscountRate" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 60px; color: #fff; background: #d30e2c; border-radius: 60px ; text-decoration:solid;"></h3>
+                                        </center>
+                                        <p style="font-size:20px"> COUPON CODE: <b class="right">XXX-XXX-XXX</b></p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <br />
+                @*@using (Html.BeginForm("StoreOffer", "Admin"))
+                        {
+                            <div class="form-group ">
+                                <center>
+                                    <input target="_blank" value="Continue" type="submit" id="button" class="btn btn-primary login-button" />
+                                </center>
+                            </div>
+                    }*@
+                @Html.HiddenFor(c => c.Merchant.CompanyName)
+                <div class="form-group ">
+                    <center>
+                        <input target="_blank" value="Continue" type="submit" id="btnContinue" class="btn btn-primary login-button" />
+                    </center>
+                </div>
+
+                @*<div style="text-align: center; font-size: 12px; color: #b2b2b5; margin-top: 20px">
+                        <p>
+                            Powered by Veme <br>
+                            <a href="javascript: void(0);" style="color: #b2b2b5; text-decoration: underline;">Unsubscribe</a>
+                        </p>
+                    </div>*@
+            </div>
+        </div>
+
+    </div>
+}
+@section scripts{
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script>
+        $(function () {
+            //alert("Hello World");
+            $('#preview').hide();
+            ShowPreview();
+            $('.datepicker').datepicker({
+                format: 'dd/MM/yyyy',
+                startDate:'@DateTime.Now'
+            });
+        });
+
+        function ShowPreview() {
+            $('#button').click(function (e) {
+                e.preventDefault();
+
+                $('#form').fadeToggle();
+                $('#preview').fadeToggle();
+                //Update preview
+                var getCompanyName = $('#Merchant_CompanyName').val();
+                $('.CompanyName').html(getCompanyName);
+                $('.OfferName').text($('#OfferName').val());
+                var begin = $('#OfferBegins').val().toString();
+                var ends = $('#OfferEnds').val().toString();
+                $('.OfferPeriod').append('<b>' + begin + ' - ' + ends + '</b>');
+                $('.OfferDetails').append('<br>' + $('#OfferDetails').val() + '</b>');
+                $('.DiscountRate').text($('#DiscountRate').val() +'%');
+                //alert($('#DiscountRate').val() + '%');
+
+            });
+        }
+    </script>
+
+}}

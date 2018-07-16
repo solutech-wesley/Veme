@@ -1,0 +1,51 @@
+﻿@using Veme.Models
+
+@*<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Veme", "CreateOffer", "Merchant", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Create Offer", "CreateOffer", "Merchant")</li>
+                <li>@Html.ActionLink("Redeem Coupon", "RedeemCoupon", "Merchant")</li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>
+</div>*@
+
+<!--New Nav Bark Up-->
+
+<div class="col-xs-12">
+    <a href="#" class="nav-opener text-center hidden visible-sm visible-xs"><i class="fa fa-bars"></i></a>
+
+    <!-- nav of the page -->
+    <nav id="nav">
+        <ul class="list-unstyled">
+            <li><a href="javascript:void(0);">Merchant</a></li>
+            <li>@Html.ActionLink("Validate Coupon", "RedeemCoupon", "Merchant")</li>
+            <li><a href="javascript:void(0);">Edit Offer</a></li>
+            @*@{
+                if (this.User.IsInRole(Veme.Models.RoleName.Admin))
+                {
+                    @Html.Partial("_AdminNav")
+                }
+                if (this.User.IsInRole(RoleName.Merchant))
+                {
+                    @Html.Partial("_MerchantNav")
+                }
+                if (this.User.IsInRole("_CustomerNav"))
+                {
+                    @Html.Partial("_CustomerNav")
+                }
+            }*@
+        </ul>
+    </nav>
+            <a href="@Url.Action("CreateOffer","Merchant")" class="btn-primary text-center text-uppercase">Submit Offer</a>
+</div>

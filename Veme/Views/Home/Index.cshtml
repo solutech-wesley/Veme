@@ -1,0 +1,146 @@
+﻿@using Microsoft.AspNet.Identity
+@model Veme.Models.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<style>
+    .stripe-button-el{
+
+    }
+</style>
+<!-- banner of the page -->
+<section class="banner bg-full overlay" style="background-image: url(http://placehold.it/1920x900);">
+    <div class="holder">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-left">
+                    <h1 class="text-uppercase">It looks like it's <br class="hidden-xs">been furnished <br class="hidden-xs">by <span class="clr">discount</span> <br class="hidden-xs">stores.</h1>
+                    <form action="#" class="search-form lg-round">
+                        <fieldset>
+                            <label for="search"><i class="icon icon-search"></i></label>
+                            <input type="search" class="form-control" id="search" placeholder="Search coupons & deals">
+                            <button type="submit" class="btn-icon"><i class="icon-right-arrow"></i></button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- latest coupon of the page -->
+<section class="latest-coupon container pad-top-lg pad-bottom-md">
+    <div class="row">
+        <header class="col-xs-12 text-center header">
+            @*<h2 class="heading">Latest Coupon Codes &amp; Deals</h2>*@
+            <h2 class="heading">Latest Offers &amp; Deals</h2>
+        </header>
+    </div>
+
+    <div class="row" id="firstRow">
+        @{
+            //foreach (var offer in Model.LatestOffers)
+            if (Model.LatestOffers.Count > 0)
+            {
+                for (byte i = 0; i < Model.LatestOffers.Count && i < 4; i++)
+                {
+                    using (Html.BeginForm("GetCoupon", "Home", FormMethod.Post))
+                    {
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <!-- coupon box of the page -->
+                            <div class="coupon-box mar-bottom-xs">
+                                <div class="img-holder">
+                                    <img src="http://placehold.it/260x190" alt="image description" class="img-resposnive">
+                                </div>
+                                <div class="txt-holder">
+                                    <!--h3 class="heading6"><a href="coupon-detail.html">Extra Up To 20% Off On All Furnitures</a></h3-->
+                                    <h3 class="heading6" style="color:black;"><a href="coupon-detail.html">@Model.LatestOffers[i].Merchant.CompanyName</a></h3>
+                                    <h3 class="heading6" style="color:black;"><a href="coupon-detail.html">@Model.LatestOffers[i].OfferName</a></h3>
+                                    <h5 class=""><a href="coupon-detail.html">@Model.LatestOffers[i].OfferDetails</a></h5>
+                                    @*<ul class="list-unstyled list-show">
+            <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
+            <li><a href="#"><i class="icon icon-user"></i> Used</a></li>
+        </ul>*@
+                                    @*<a href="coupon-detail.html" class="btn-primary md-round text-center text-uppercase">Get Coupon</a>*@
+                                    @*<form action="@Url.Action("Charge","Payment")" method="POST">*@
+                                        @Html.ActionLink("Get Coupon", "CouponDetails", "Home", new { OfferId = @Model.LatestOffers[i].OfferId }, htmlAttributes: new { @class = "btn-primary md-round text-center text-uppercase" })
+                                        <time class="time text-center" datetime="2017-02-03">Expires On : @Model.LatestOffers[i].OfferEnds.ToString("MMM-dd-yyyy")</time>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+            }
+        }
+    </div>
+    @if (Model.LatestOffers.Count > 4 && Model.LatestOffers != null)
+    {
+
+        <div class="row" id="secondRow">
+            @for (byte i = 4; i < 8; i++)
+            {
+                using (Html.BeginForm("GetCoupon", "Home", FormMethod.Post))
+                {
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <!-- coupon box of the page -->
+                        <div class="coupon-box mar-bottom-xs">
+                            <div class="img-holder">
+                                <img src="http://placehold.it/260x190" alt="image description" class="img-resposnive">
+                            </div>
+                            <div class="txt-holder">
+                                <!--h3 class="heading6"><a href="coupon-detail.html">Extra Up To 20% Off On All Furnitures</a></h3-->
+                                <h3 class="heading5"><a href="coupon-detail.html">@Model.LatestOffers[i].Merchant.CompanyName</a></h3>
+                                <h3 class="heading5"><a href="coupon-detail.html">@Model.LatestOffers[i].OfferName</a></h3>
+                                <h3 class="heading6"><a href="coupon-detail.html">@Model.LatestOffers[i].OfferDetails</a></h3>
+                                @*<ul class="list-unstyled list-show">
+                                        <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
+                                        <li><a href="#"><i class="icon icon-user"></i> Used</a></li>
+                                    </ul>*@
+                                @*<a href="coupon-detail.html" class="btn-primary md-round text-center text-uppercase">Get Coupon</a>*@
+                                @Html.ActionLink("Get Coupon", "GetCoupon", "Home", new { OfferId = @Model.LatestOffers[i].OfferId }, htmlAttributes: new { @class = "btn-primary md-round text-center text-uppercase" })
+                                <time class="time text-center" datetime="2017-02-03">Expires On : @Model.LatestOffers[i].OfferEnds.ToString("MMM-dd-yyyy")</time>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+        </div>
+
+
+
+
+    }
+</section>
+<!-- store sec of the page -->
+@section Scripts
+{
+    <script>
+        //$(document).ready(function () {
+        //    $('.stripe-button-el').addClass('btn-primary md-round text-center text-uppercase');
+        //});
+    </script>
+}
+@*@section Scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $('form').submit(function (e) {
+                e.preventDefault();
+
+                var getValue = $('span').val();
+                //var val = $("input[type=submit][clicked=true]").val();
+                var val1 = $("input[type=submit][clicked=true]").id;
+                var getID = this.id();
+                //var get = e.target;
+                //var currentID = get.hidden || "No ID!";
+                alert(val1);
+            });
+        });
+    </script>
+
+    }*@

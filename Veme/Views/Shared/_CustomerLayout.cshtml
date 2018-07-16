@@ -1,0 +1,229 @@
+﻿@using Veme.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600%7CPoppins:300,400,500,600,900%7CLily+Script+One" rel="stylesheet">
+    <!-- include the site stylesheet -->
+    <!--link rel="stylesheet" href="css/font-awesome.css"-->
+    <link href="~/Content/Site-theme/css/font-awesome.css" rel="stylesheet" />
+    <!-- include the site stylesheet -->
+    <!--link rel="stylesheet" href="css/bootstrap.css"-->
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <!-- include the site stylesheet -->
+    <!--link rel="stylesheet" href="css/plugins.css"-->
+    <link href="~/Content/Site-theme/css/plugins.css" rel="stylesheet" />
+    <!-- include the site stylesheet -->
+    <!--link rel="stylesheet" href="css/icofont.css"-->
+    <link href="~/Content/Site-theme/css/icofont.css" rel="stylesheet" />
+    <!-- include the site stylesheet -->
+    <!--link rel="stylesheet" href="style.css"-->
+    <link href="~/Content/Site-theme/style.css" rel="stylesheet" />
+    <!-- include the site stylesheet -->
+    @*<link rel="stylesheet" href="css/colors.css">*@
+    <link href="~/Content/Site-theme/css/colors.css" rel="stylesheet" />
+    <!-- include the site stylesheet -->
+    @*<link rel="stylesheet" href="css/responsive.css">*@
+    <link href="~/Content/Site-theme/css/responsive.css" rel="stylesheet" />
+    <!-- include the site stylesheet -->
+    <style class="color_css"></style>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+<body>
+    <!-- main container of all the page elements -->
+    <div id="wrapper">
+        <!-- header of the page -->
+        <header id="header">
+            <!-- header top of the page -->
+            <div class="header-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span class="txt">Welcome to Veme Save More With Our Deals</span>
+                            <ul class="align-left list-unstyled">
+                                @Html.Partial("_CustomerLoginPartial")
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- header holder of the page -->
+            <div class="header-holder container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="logo">
+                            <a href="javascript:void(0);"><img src="~/Content/Site-theme/images/logo.png" alt="Veme" class="img-resposnive"></a>
+                        </div>
+                        @if (this.User.IsInRole(RoleName.Customer))
+                        {
+                            <div class="search-cart">
+                                <form action="#" class="search-form">
+                                    <fieldset>
+                                        <select>
+                                            <option value="0">Select Category</option>
+                                            <option value="1">Select Category</option>
+                                            <option value="2">Select Category</option>
+                                        </select>
+                                        <input type="search" class="form-control" placeholder="Enter Keyword . . .">
+                                        <button type="submit" class="sub-btn"><i class="icon-search"></i></button>
+                                    </fieldset>
+                                </form>
+                                <a href="#" class="cart"><i class="icon-cart"></i> <span class="num round">2</span></a>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- nav holder of the page -->
+            <div class="nav-holder">
+                <div class="container">
+                    <div class="row">
+                            @if (this.User.IsInRole(Veme.Models.RoleName.Admin))
+                            {
+                                @Html.Partial("_AdminNav")
+                            }
+
+                            @if (this.User.IsInRole(RoleName.Merchant))
+                            {
+                                @Html.Partial("_MerchantNav")
+                            }
+
+                            @if (this.User.IsInRole(RoleName.Customer))
+                            {
+                                @Html.Partial("_CustomerNav")
+                            }
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header of the page end -->
+        <!-- main of the page -->
+        <main id="main">
+            <!--The page information will be displayed here-->
+            @RenderBody()
+        </main>
+
+        <!-- footer of the page -->
+        <footer id="footer">
+            <!-- footer holder of the page -->
+            <div class="footer-holder container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col1">
+                            <h3 class="text-uppercase">Contact Coupmy</h3>
+                            <ul class="list-unstyled contact-list">
+                                <li>
+                                    <span class="icon icon-location"></span>
+                                    <address>824 Bel Meadow Drive, California, USA</address>
+                                </li>
+                                <li>
+                                    <span class="icon icon-phone"></span>
+                                    <span class="tel"><a href="tel:112345678520">(+11) 234 567 8520</a><a href="tel:112345678520">(+11) 234 567 8520</a></span>
+                                </li>
+                                <li>
+                                    <span class="icon icon-email"></span>
+                                    <span class="mail"><a href="mailto:Info@Coupmy.Com">Info@Coupmy.Com</a><a href="mailto:Mail@Coupmy.Com">Mail@Coupmy.Com</a></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col2">
+                            <h3 class="text-uppercase">Quick Links</h3>
+                            <ul class="list-unstyled f-nav">
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Coupons</a></li>
+                                <li><a href="#">Offers</a></li>
+                                <li><a href="#">Deals</a></li>
+                                <li><a href="#">Latest News</a></li>
+                                <li><a href="#">Support</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="col3">
+                            <h3 class="text-uppercase">Categories</h3>
+                            <ul class="list-unstyled tags">
+                                <li><a href="#">Restaurant</a></li>
+                                <li><a href="#">Health</a></li>
+                                <li><a href="#">Fitness</a></li>
+                                <li><a href="#">Events</a></li>
+                                <li><a href="#">Beauty</a></li>
+                                <li><a href="#">Sports</a></li>
+                                <li><a href="#">Electronics</a></li>
+                                <li><a href="#">Watches</a></li>
+                            </ul>
+                            <h3 class="text-uppercase">Follow us</h3>
+                            <ul class="list-unstyled socail-network">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="col4">
+                            <h3 class="text-uppercase">Recent Tweets</h3>
+                            <ul class="list-unstyled recent-tweet">
+                                <li>
+                                    <span class="icon"><i class="fa fa-twitter"></i></span>
+                                    <div class="txt-holder">
+                                        <p><a href="#">Micheal Doe</a> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accu santium dolo remque laudan tium, </p>
+                                        <time datetime="2018-02-03 20:00" class="time">Posted on 29 Sep</time>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="fa fa-twitter"></i></span>
+                                    <div class="txt-holder">
+                                        <p><a href="#">Micheal Doe</a> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accu santium dolo remque laudan tium, </p>
+                                        <time datetime="2018-02-03 20:00" class="time">Posted on 29 Sep</time>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer area of the page -->
+            <div class="footer-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-5">
+                            <p>© @DateTime.Now.Year Veme</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-7">
+                            <ul class="list-unstyled footer-nav">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Services</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms&amp;Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer of the page end -->
+        <span id="back-top" class="text-center md-round fa fa-angle-up"></span>
+        <!-- loader of the page -->
+        <div id="loader" class="loader-holder">
+            <div class="block"><img src="~/Content/Site-theme/images/svg/bars.svg" width="60" alt="loader"></div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- main container of all the page elements end -->
+    <!-- include jQuery -->
+    <script src="~/Content/Site-theme/js/jquery.js"></script>
+    <!-- include jQuery -->
+    <script src="~/Content/Site-theme/js/plugins.js"></script>
+    <!-- include jQuery -->
+    <script src="~/Content/Site-theme/js/jquery.main.js"></script>
+    <div id="style-changer" data-src="style-changer.html"></div>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

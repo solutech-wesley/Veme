@@ -1,0 +1,168 @@
+﻿@using  Microsoft.AspNet.Identity
+@model Veme.Models.CouponDetailsViewModel
+@{
+    ViewBag.Title = "Coupon Details";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<div class="twocolumns pad-top-lg pad-bottom-lg">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- content of the page -->
+                <article id="content">
+                    <!-- post detail of the page -->
+                    <div class="post-detail style2">
+                        <div class="img-holder">
+                            <img src="http://placehold.it/770x340" alt="image description" class="img-responsive">
+                        </div>
+                        <div class="txt-holder">
+                            <header class="header">
+                                <div class="coupon-logo">
+                                    <img src="http://placehold.it/100x50" alt="Red Cart" class="img-responsive">
+                                </div>
+                                <div class="align-left">
+                                    <!--h3 class="heading3">Upto 15% + Extra 10% Off Home &amp; Kitchen Appliances</h3-->
+                                    <h3 class="heading3">@Model.Offer.Merchant.CompanyName (@Model.Offer.OfferName)</h3>
+                                    <h4 class="heading4">@Model.Offer.OfferDetails</h4>
+
+                                    @*<ul class="list-unstyled list-show">
+                                            <li><a href="#"><i class="icon icon-smile"></i> Verified</a></li>
+                                            <li><a href="#"><i class="icon icon-user"></i> 35 Used</a></li>
+                                        </ul>*@
+                                </div>
+                            </header>
+                            <p><i>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.</i></p>
+                            <p>Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <footer class="footer">
+                                <form action="@Url.Action("GetCoupon","Home")" method="Post">
+                                    @Html.Hidden("OfferId", Model.Offer.OfferId)
+                                    <script src="https://checkout.stripe.com/checkout.js" id="" class="stripe-button"
+                                            data-key="@ViewBag.PublicKey"
+                                            data-amount="@(Model.Offer.CouponPrice == 0? (0*100) : (Model.Offer.CouponPrice)*100)"
+                                            data-name="Solutech Innovation Ltd"
+                                            data-description="Widget"
+                                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                            data-locale="auto"
+                                            data-currency="usd"
+                                            data-email="@User.Identity.GetUserName()"
+                                            data-label="SUBSCRIBE"
+                                            data-panel-label="PAY"
+                                            @*data-SubscriptionId="@item.SubscriptionId.ToString()"*@>
+                                    </script>
+                                    <script>
+                                        document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                                    </script>
+                                    @*<a href="#" class="btn-primary text-center text-uppercase">Get Coupon Code</a>*@
+                                    <input type="submit" name="Get Coupon" class="btn-primary text-center text-uppercase" value="Get Coupon" />
+                                </form>
+
+                                <ul class="list-unstyled social-network">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </footer>
+                        </div>
+                    </div>
+
+                </article>
+                <!-- sidebar of the page -->
+                <aside id="sidebar">
+                    <!-- Widget of the page -->
+                    <section class="widget search-widget">
+                        <form action="#" class="search-form">
+                            <fieldset>
+                                <input type="search" class="form-control" placeholder="Enter Keyword">
+                                <button type="submit" class="sub-btn text-center text-uppercase">GO</button>
+                            </fieldset>
+                        </form>
+                    </section>
+                    <!-- Widget of the page -->
+                    <!--section class="widget category-widget">
+                        <h3 class="heading4">Blog Categories</h3>
+                        <ul class="list-unstyled category-list">
+                            <li><a href="#"><span class="pull-left">All Categories</span><span class="pull-right">(10)</span></a></li>
+                            <li><a href="#"><span class="pull-left">Beauty</span><span class="pull-right">(07)</span></a></li>
+                            <li><a href="#"><span class="pull-left">Health</span><span class="pull-right">(15)</span></a></li>
+                            <li><a href="#"><span class="pull-left">Fitness</span><span class="pull-right">(13)</span></a></li>
+                            <li><a href="#"><span class="pull-left">Watches</span><span class="pull-right">(05)</span></a></li>
+                        </ul>
+                    </section-->
+                    <!-- Widget of the page -->
+                    <section class="widget popular-widget">
+                        <h3 class="heading4">Popular Offers</h3>
+                        <ul class="list-unstyled popular-list">
+                            <li><a href="#"><img src="http://placehold.it/85x85" alt="image description" class="img-responsive"></a></li>
+                            <li><a href="#"><img src="http://placehold.it/85x85" alt="image description" class="img-responsive"></a></li>
+                            <li><a href="#"><img src="http://placehold.it/85x85" alt="image description" class="img-responsive"></a></li>
+                            <li><a href="#"><img src="http://placehold.it/85x85" alt="image description" class="img-responsive"></a></li>
+                            <li><a href="#"><img src="http://placehold.it/85x85" alt="image description" class="img-responsive"></a></li>
+                            <li><a href="#"><img src="http://placehold.it/85x85" alt="image description" class="img-responsive"></a></li>
+                            <li><a href="#" class="text-uppercase">View All Stores</a></li>
+                        </ul>
+                    </section>
+                    <!-- Widget of the page -->
+                    <section class="widget news-widget">
+                        <h3 class="heading4">Latest Offers</h3>
+                        <ul class="list-unstyled latest-news-list">
+                            <li>
+                                <div class="img-holder round">
+                                    <a href="#"><img src="http://placehold.it/75x75" alt="image description" class="img-responsive"></a>
+                                </div>
+                                <div class="txt-holder">
+                                    <h3><a href="#">Veritatis Euas Arch Beatae Vitae</a></h3>
+                                    <ul class="list-unstyled news-nav">
+                                        <li>By <a href="#">Admin</a></li>
+                                        <li>|</li>
+                                        <li><time datetime="2017-02-03 20:00">Sep 07, 2017</time></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-holder round">
+                                    <a href="#"><img src="http://placehold.it/75x75" alt="image description" class="img-responsive"></a>
+                                </div>
+                                <div class="txt-holder">
+                                    <h3><a href="#">Numquam Eius Modi Tempora Incid</a></h3>
+                                    <ul class="list-unstyled news-nav">
+                                        <li>By <a href="#">Admin</a></li>
+                                        <li>|</li>
+                                        <li><time datetime="2017-02-03 20:00">Sep 07, 2017</time></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="img-holder round">
+                                    <a href="#"><img src="http://placehold.it/75x75" alt="image description" class="img-responsive"></a>
+                                </div>
+                                <div class="txt-holder">
+                                    <h3><a href="#">Vel Illum Qui Dolore Eum Fugiat</a></h3>
+                                    <ul class="list-unstyled news-nav">
+                                        <li>By <a href="#">Admin</a></li>
+                                        <li>|</li>
+                                        <li><time datetime="2017-02-03 20:00">Sep 07, 2017</time></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                    <!-- Widget of the page -->
+                    <section class="widget tags-widget">
+                        <h3 class="heading4">Popular Tags</h3>
+                        <ul class="list-unstyled tags-list text-center">
+                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">Watches</a></li>
+                            <li><a href="#">Sports</a></li>
+                            <li><a href="#">Beauty &amp; Fitness</a></li>
+                            <li><a href="#">Fashion</a></li>
+                        </ul>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+
+

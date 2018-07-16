@@ -1,0 +1,109 @@
+﻿@model Veme.Models.OfferModel
+@{
+    ViewBag.Title = "CreateOffer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var createOrUpdate = Model.OFFERID == null ? "CreateOffer" : "UpdateOffer";
+    var actionName = createOrUpdate == "CreateOffer" ? "Create Offer" : "Update Offer";
+}
+@Styles.Render("~/Content/register")
+@Styles.Render("~/Content/datepicker")
+
+<div class="container">
+    <div class="row main">
+        <div class="main-login main-center">
+            <h5>Sign up once and watch any of our free demos.</h5>
+            @using (Html.BeginForm(createOrUpdate, "Admin", FormMethod.Post,new { autocomplete="off"}))
+            {
+
+                <div class="form-group">
+                    @Html.LabelFor(c => c.OffererId, new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            @Html.DropDownListFor(c => c.OffererId, new SelectList(Model.Merchants, "ID", "Name"),"Select Merchant", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(c => c.OfferName, new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.OfferName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(c => c.Discount, new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            @Html.EditorFor(c => c.Discount, new { htmlAttributes = new { @class = "form-control", placeholder = "25",@min="1",@type="number" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(c => c.TotalOffers, new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            @Html.EditorFor(c => c.TotalOffers, new { htmlAttributes = new { @class = "form-control", placeholder = "25" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(c => c.OfferDescription, new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.OfferDescription, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(c => c.OfferStarts, new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.OfferStarts, new { @class = "form-control datepicker" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(c => c.OfferEnds, new { @class = "cols-sm-2 control-label" })
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            @Html.TextBoxFor(c => c.OfferEnds, new { @class = "form-control datepicker" })
+
+                        </div>
+                    </div>
+                </div>
+                @Html.HiddenFor(c => c.OFFERID)
+                <div class="form-group ">
+                    <center>
+                        <input target="_blank" value="@actionName" type="submit" id="button" class="btn btn-primary btn-lg btn-block login-button" />
+                    </center>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script>
+        $(function () {
+            //alert("Hello World");
+            $('.datepicker').datepicker({
+                format: 'dd/mm/yyyy',
+                startDate:'@DateTime.Now'
+            });
+        });
+    </script>
+
+}
